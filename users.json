@@ -1,0 +1,14 @@
+{
+  "users": [
+    {
+      "email": "admin@vntsports.com",
+      "password": "Admin123",
+      "role": "admin"
+    },
+    {
+      "email": "user@vntsports.com",
+      "password": "User123",
+      "role": "user"
+    }
+  ]
+}

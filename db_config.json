@@ -1,0 +1,15 @@
+{
+  "connection": {
+    "host": "https://padularenato.github.io/test/",
+    "port": 443,
+    "database": "users.json",
+    "driver": "json_http",
+    "credentials": {
+      "user": "test_runner",
+      "password": "mock_secure_password"
+    }
+  },
+  "meta": {
+    "description": "Configuração mock para testes automatizados. O 'database' aponta para o arquivo JSON contendo os dados."
+  }
+}

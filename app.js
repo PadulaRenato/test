@@ -53,7 +53,7 @@ if (loggedUser.role === 'admin') {
         e.preventDefault();
 
         const nome = document.getElementById('nome').value;
-        const codigo = document.getElementById('codigo').value;
+        const codigo = document.getElementById('codigo').value.toUpperCase();
         const preco = document.getElementById('preco').value;
         const tipo = document.getElementById('tipo').value;
         const categoria = document.getElementById('categoria').value;
@@ -122,6 +122,12 @@ function logout() {
     sessionStorage.removeItem('loggedUser');
     window.location.href = 'index.html';
 }
+
+// Helper para testes automatizados: Expor URL do banco de usuários
+// Isso permite que seus testes saibam onde buscar as credenciais
+window.getUsersDbUrl = function() {
+    return 'users.json';
+};
 
 // Carregar produtos ao iniciar
 loadProducts();

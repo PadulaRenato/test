@@ -1,7 +1,7 @@
 // Usuários válidos
 const users = [
-    { email: 'admin@vnt.com', password: 'Password', role: 'admin' },
-    { email: 'user@vnt.com', password: 'Password', role: 'user' }
+    { email: 'admin@vntsports.com', password: 'Admin123', role: 'admin' },
+    { email: 'user@vntsports.com', password: 'User123', role: 'user' }
 ];
 
 // Verificar se já está logado
