@@ -29,7 +29,7 @@ function loadProducts() {
     const products = JSON.parse(localStorage.getItem('products')) || [];
     const tableBody = document.getElementById('productTableBody');
     tableBody.innerHTML = '';
-    
+
     products.forEach((product, index) => {
         const row = document.createElement('tr');
         row.innerHTML = `
@@ -47,29 +47,37 @@ function loadProducts() {
 // Mostrar formulário apenas para Admin
 if (loggedUser.role === 'admin') {
     document.getElementById('productForm').style.display = 'block';
-    
+
     // Processar cadastro de produto
-    document.getElementById('formCadastro').addEventListener('submit', function(e) {
+    document.getElementById('formCadastro').addEventListener('submit', function (e) {
         e.preventDefault();
-        
+
         const nome = document.getElementById('nome').value;
         const codigo = document.getElementById('codigo').value;
         const preco = document.getElementById('preco').value;
         const tipo = document.getElementById('tipo').value;
         const categoria = document.getElementById('categoria').value;
         const message = document.getElementById('form-message');
-        
+
+        // Validar preço
+        if (parseFloat(preco) <= 0) {
+            message.textContent = 'Erro: O preço deve ser maior que zero!';
+            message.className = 'form-message error';
+            message.style.display = 'block';
+            return;
+        }
+
         // Validar código único
         const products = JSON.parse(localStorage.getItem('products')) || [];
-        const codigoExists = products.some(p => p.codigo === codigo);
-        
+        const codigoExists = products.some(p => p.codigo.toLowerCase() === codigo.toLowerCase());
+
         if (codigoExists) {
             message.textContent = 'Erro: Código já cadastrado!';
             message.className = 'form-message error';
             message.style.display = 'block';
             return;
         }
-        
+
         // Adicionar produto
         const newProduct = {
             nome,
@@ -78,22 +86,22 @@ if (loggedUser.role === 'admin') {
             categoria,
             preco: parseFloat(preco)
         };
-        
+
         products.push(newProduct);
         localStorage.setItem('products', JSON.stringify(products));
-        
+
         // Limpar formulário
         document.getElementById('formCadastro').reset();
-        
+
         // Mostrar mensagem de sucesso
         message.textContent = 'Produto cadastrado com sucesso!';
         message.className = 'form-message';
         message.style.display = 'block';
-        
+
         setTimeout(() => {
             message.style.display = 'none';
         }, 3000);
-        
+
         // Recarregar tabela
         loadProducts();
     });
